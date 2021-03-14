@@ -3,6 +3,9 @@ from pygame.draw import *
 from random import randint, random, choice
 
 pygame.init()
+pygame.font.init()
+font = pygame.font.SysFont('arial', 36)
+
 
 a = 500
 b = 500
@@ -48,6 +51,8 @@ def draw_ball(x, y, r, dx, dy, points):
         y += dy
         screen.fill(BLACK)
         circle(screen, color, (x, y), r)
+        text_score = font.render(f'Score: {points}', True, BLUE)
+        screen.blit(text_score, (350, 10))
         pygame.display.update()
         clock.tick(FPS)
 
@@ -74,6 +79,7 @@ def click(event, x, y, r, position, points):
     if (position[0] > x - r and position[0] < x + r and position[1] > y - r and position[1] < y + r):
         points += 1
         print(f'Your points {points}')
+
         not_killed = False
 
     return points, not_killed
